@@ -8,9 +8,6 @@
                            http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd"
        >
 
-<bean id="randomGenerator" class="lt.inventi.playground.beans.RandomGenerator"/>
-<bean id="output" class="lt.inventi.playground.beans.Output"/>
-
 <bean id="playgroundRouteBuilder" class="lt.inventi.playground.PlaygroundRouteBuilder"/>
 
 <amq:broker useJmx="false" persistent="true">
