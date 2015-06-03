@@ -8,15 +8,18 @@
                            http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd"
        >
 
-    <bean id="playgroundRouteBuilder" class="lt.inventi.playground.PlaygroundRouteBuilder"/>
+<bean id="randomGenerator" class="lt.inventi.playground.PlaygroundRouteBuilder.RandomGenerator"/>
+<bean id="output" class="lt.inventi.playground.PlaygroundRouteBuilder.Output"/>
 
-    <amq:broker useJmx="false" persistent="true">
-        <amq:transportConnectors>
-            <amq:transportConnector uri="tcp://localhost:61636" />
-        </amq:transportConnectors>
-    </amq:broker>
+<bean id="playgroundRouteBuilder" class="lt.inventi.playground.PlaygroundRouteBuilder"/>
 
-    <camel:camelContext id="playground-camel-context">
-        <camel:routeBuilder ref="playgroundRouteBuilder"/>
-    </camel:camelContext>
+<amq:broker useJmx="false" persistent="true">
+    <amq:transportConnectors>
+        <amq:transportConnector uri="tcp://localhost:61636" />
+    </amq:transportConnectors>
+</amq:broker>
+
+<camel:camelContext id="playground-camel-context">
+    <camel:routeBuilder ref="playgroundRouteBuilder"/>
+</camel:camelContext>
 </beans>
