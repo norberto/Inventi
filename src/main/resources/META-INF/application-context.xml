@@ -3,20 +3,41 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:camel="http://camel.apache.org/schema/spring"
        xmlns:amq="http://activemq.apache.org/schema/core"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
                            http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
-                           http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd"
-       >
+                           http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
+                           http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd"
+        >
 
-<bean id="playgroundRouteBuilder" class="lt.inventi.playground.PlaygroundRouteBuilder"/>
+    <bean id="playgroundRouteBuilder" class="lt.inventi.playground.PlaygroundRouteBuilder"/>
+    <bean id="pingpongservice" class="lt.inventi.playground.PingPongService"/>
 
-<amq:broker useJmx="false" persistent="true">
-    <amq:transportConnectors>
-        <amq:transportConnector uri="tcp://localhost:61636" />
-    </amq:transportConnectors>
-</amq:broker>
+    <amq:broker useJmx="false" persistent="true">
+        <amq:transportConnectors>
+            <amq:transportConnector uri="tcp://localhost:61636" />
+        </amq:transportConnectors>
+    </amq:broker>
 
-<camel:camelContext id="playground-camel-context">
-    <camel:routeBuilder ref="playgroundRouteBuilder"/>
-</camel:camelContext>
+    <camel:camelContext id="playground-camel-context">
+        <camel:routeBuilder ref="playgroundRouteBuilder"/>
+    </camel:camelContext>
+
+
+    <cxf:cxfEndpoint id="pingPongEndpoint"
+                     address="/Ping"
+                     wsdlURL="PingPong.wsdl"
+                     endpointName="s:PingPong"
+                     serviceName="s:PingPongService"
+                     xmlns:s="http://pingpong.bpel.tps">
+        <cxf:inInterceptors>
+            <bean class="org.apache.cxf.transport.common.gzip.GZIPInInterceptor"/>
+        </cxf:inInterceptors>
+        <cxf:properties>
+            <entry key="dataFormat" value="PAYLOAD"/>
+        </cxf:properties>
+
+    </cxf:cxfEndpoint>
+
 </beans>
+
