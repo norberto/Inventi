@@ -13,18 +13,16 @@ import org.apache.camel.builder.xml.Namespaces;
 
 public class PlaygroundRouteBuilder extends RouteBuilder {
     Namespaces ns = new Namespaces("pin", "http://pingpong.bpel.tps");
+    String prefix = "<pin:echoInputResponse xmlns:pin=\"http://pingpong.bpel.tps\">\n" + "<pin:echoInputReturn>";
+    String postfix = "</pin:echoInputReturn>\n" + "</pin:echoInputResponse>\n";
+
     public void configure() throws Exception {
         from("cxf:bean:pingPongEndpoint")
-                .filter()
-                .xpath("//pin:echoInput/pin:input/text()", ns)
-                .process(new Processor() {
-                         public void process(Exchange msg) {
-                             String temp = msg.getIn().getBody(String.class);
-                             temp = temp.replaceAll("echoInput", "echoInputResponse");
-                             temp = temp.replaceAll("input", "echoInputReturn");
-                             msg.getIn().setBody(temp);
-                         }
-                 });
+                .filter(ns.xpath("//pin:echoInput/pin:input"))
+                .setBody(ns.xpath("//pin:input/text()"))
+                .end()
+                .setBody(body().append(postfix).prepend(prefix))
+                .log(LoggingLevel.INFO, "\n\n${body}\n");
     }
 }
 

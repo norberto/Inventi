@@ -42,7 +42,7 @@
             <wsdlsoap:operation soapAction=""/>
             <wsdl:input name="echoInputRequest">
                 <wsdlsoap:body use="literal"/>
-</wsdl:input>
+            </wsdl:input>
 
             <wsdl:output name="echoInputResponse">
                 <wsdlsoap:body use="literal"/>
