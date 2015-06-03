@@ -16,10 +16,3 @@ public class PlaygroundRouteBuilder extends RouteBuilder {
                .beanRef("requestManager", "fromRequestToResponse");
     }
 }
-
-/** TODO
- *
- * 1] Github pakeisti root i base dir(re-base i ../), kad includintu pom.xml and stuff (turetume galeti kompiliuoti)
- * 2] Xpath pertvarkyti xpath (dunno kaip tiksliai, nes ne viska supratau. -> ask later)
- *
- */
