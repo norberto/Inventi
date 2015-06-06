@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="1691a736-1c58-44c3-b374-abd752b16ffe" activeEnvironment="Default" name="PingPong" resourceRoot="" soapui-version="5.1.3" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="20900641-3801-47e2-a5f7-b07eaa4628ec" wsaVersion="NONE" name="PingPongSoapBinding" type="wsdl" bindingName="{http://pingpong.bpel.tps}PingPongSoapBinding" soapVersion="1_1" anonymous="optional" definition="file:/E:/TASK/src/main/resources/PingPong.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\E:\TASK\src\main\resources\PingPong.wsdl"><con:part><con:url>file:\E:\TASK\src\main\resources\PingPong.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://pingpong.bpel.tps" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://pingpong.bpel.tps" xmlns:intf="http://pingpong.bpel.tps" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!--WSDL created by Apache Axis version: 1.4
+    Built on Apr 22, 2006 (06:55:48 PDT)-->
+  <wsdl:types>
+    <schema elementFormDefault="qualified" targetNamespace="http://pingpong.bpel.tps" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="echoInput">
+        <complexType>
+          <sequence>
+            <element name="input" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="echoInputResponse">
+        <complexType>
+          <sequence>
+            <element name="echoInputReturn" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="echoInputResponse">
+    <wsdl:part element="impl:echoInputResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="echoInputRequest">
+    <wsdl:part element="impl:echoInput" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="PingPong">
+    <wsdl:operation name="echoInput">
+      <wsdl:input message="impl:echoInputRequest" name="echoInputRequest"/>
+      <wsdl:output message="impl:echoInputResponse" name="echoInputResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PingPongSoapBinding" type="impl:PingPong">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="echoInput">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="echoInputRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="echoInputResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PingPongService">
+    <wsdl:port binding="impl:PingPongSoapBinding" name="PingPong">
+      <wsdlsoap:address location="http://157.159.110.224:9000/PingPong/services/PingPong"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://157.159.110.224:9000/PingPong/services/PingPong</con:endpoint><con:endpoint>http://iWanabi:8080/</con:endpoint></con:endpoints><con:operation id="7c3c1338-e502-476d-a35d-39bd124f8dee" isOneWay="false" action="" name="echoInput" bindingOperationName="echoInput" type="Request-Response" outputName="echoInputResponse" inputName="echoInputRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6218d886-5d31-44ba-b721-6477e8bacf23" name="Request 1"><con:description/><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/PingPongCustom</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pin="http://pingpong.bpel.tps">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <pin:echoInput>\r
+         <pin:input>this is just a testing message</pin:input>\r
+      </pin:echoInput>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://pingpong.bpel.tps/PingPong/echoInputRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService id="94df74c5-6658-44ed-9e5b-c5818b16be6f" port="8080" path="/" host="iWanabi" name="MockService"><con:description/><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:startScript/><con:stopScript/><con:properties/><con:onRequestScript/><con:afterRequestScript/><con:mockOperation name="echoInput" id="7b75980a-28aa-4030-9f3f-8c4c4877d36a" interface="PingPongSoapBinding" operation="echoInput"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:dispatchPath>def holder = new com.eviware.soapui.support.XmlHolder(mockRequest.requestContent)
+def from = "From Soap UI: "
+context.msg =from +  holder["//pin:input"]</con:dispatchPath><con:response name="Response 1" id="a26233a0-f7b4-4e06-9719-969d2784171b" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pin="http://pingpong.bpel.tps">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pin:echoInputResponse>
+         <pin:echoInputReturn> ${msg}</pin:echoInputReturn>
+      </pin:echoInputResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://pingpong.bpel.tps/PingPong/echoInputResponse"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
