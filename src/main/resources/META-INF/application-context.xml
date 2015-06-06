@@ -11,7 +11,7 @@
         >
 
     <bean id="playgroundRouteBuilder" class="lt.inventi.playground.PlaygroundRouteBuilder"/>
-    <bean id="requestManager" class="lt.inventi.playground.RequestManager"/>
+
 
     <amq:broker useJmx="false" persistent="true">
         <amq:transportConnectors>
@@ -25,6 +25,21 @@
 
     <cxf:cxfEndpoint id="pingPongEndpoint"
                      address="/Ping"
+                     wsdlURL="PingPong.wsdl"
+                     endpointName="s:PingPong"
+                     serviceName="s:PingPongService"
+                     xmlns:s="http://pingpong.bpel.tps">
+        <cxf:inInterceptors>
+            <bean class="org.apache.cxf.transport.common.gzip.GZIPInInterceptor"/>
+        </cxf:inInterceptors>
+        <cxf:properties>
+            <entry key="dataFormat" value="PAYLOAD"/>
+        </cxf:properties>
+
+    </cxf:cxfEndpoint>
+
+    <cxf:cxfEndpoint id="mockEndpoint"
+                     address="http://localhost:8081/MockService"
                      wsdlURL="PingPong.wsdl"
                      endpointName="s:PingPong"
                      serviceName="s:PingPongService"
