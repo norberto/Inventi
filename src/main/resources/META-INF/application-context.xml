@@ -10,6 +10,10 @@
 
 <bean id="playgroundRouteBuilder" class="lt.inventi.playground.PlaygroundRouteBuilder"/>
 
+<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+    <property name="brokerURL" value="tcp://localhost:61636"/>
+</bean>
+
 <amq:broker useJmx="false" persistent="true">
     <amq:transportConnectors>
         <amq:transportConnector uri="tcp://localhost:61636" />
@@ -19,4 +23,6 @@
 <camel:camelContext id="playground-camel-context">
     <camel:routeBuilder ref="playgroundRouteBuilder"/>
 </camel:camelContext>
+
+
 </beans>
