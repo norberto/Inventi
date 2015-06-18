@@ -39,7 +39,7 @@
     </cxf:cxfEndpoint>
 
     <cxf:cxfEndpoint id="mockEndpoint"
-                     address="http://localhost:8081/MockService"
+                     address="http://localhost:8081/"
                      wsdlURL="PingPong.wsdl"
                      endpointName="s:PingPong"
                      serviceName="s:PingPongService"

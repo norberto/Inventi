@@ -1,14 +1,17 @@
 package lt.inventi.playground;
 
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.*;
 
 /**
- * 8th task
+ * 9th task
  */
 
 public class PlaygroundRouteBuilder extends RouteBuilder {
     public void configure() throws Exception {
         from("cxf:bean:pingPongEndpoint")
-                .to("cxf:bean:mockEndpoint");
+            .log(LoggingLevel.INFO, "Request Received")
+            .to("cxf:bean:mockEndpoint")
+            .log(LoggingLevel.INFO, "Response Sent");
     }
 }
